@@ -28,6 +28,28 @@ class EntryPayload(BaseModel):
     remark: str | None = None
 
 
+class BerthCreatePayload(BaseModel):
+    """登记泊位计划：经办人随单留痕。"""
+
+    values: dict[str, Any] = Field(default_factory=dict)
+    operator: str = ""
+
+
+class BerthUpdatePayload(BaseModel):
+    """修改泊位计划编排字段：改船/改泊位须先退回，留痕经办人。"""
+
+    values: dict[str, Any] = Field(default_factory=dict)
+    operator: str = ""
+
+
+class BerthActionPayload(BaseModel):
+    """泊位计划状态流转：每次动作必须带经办人，退回必须写原因。"""
+
+    action: str
+    operator: str = ""
+    reason: str | None = None
+
+
 
 class BerthEntry(BaseModel):
     """泊位计划明细结构。"""
